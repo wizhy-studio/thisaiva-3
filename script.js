@@ -485,6 +485,39 @@ function initActivePageNav() {
    1.1 SCROLL REVEAL OBSERVER
    -------------------------------------------------------------------------- */
 function initScrollReveal() {
+  // Automatically equip content blocks below the hero with scroll-reveal classes
+  const contentBlocks = document.querySelectorAll(
+    'section:not(.hero) .section-header, ' +
+    'section:not(.hero) .container > h2, ' +
+    'section:not(.hero) .section-eyebrow, ' +
+    '.invest-card, ' +
+    '.vc-capability-card, ' +
+    '.c-pillar-card, ' +
+    '.pillars-grid > div, ' +
+    '.journey-grid > div, ' +
+    '.why-card, ' +
+    '.blog-card, ' +
+    '.faq-item, ' +
+    '.mission-card, ' +
+    '.objective-card, ' +
+    '.metric-item'
+  );
+
+  contentBlocks.forEach((el) => {
+    if (!el.classList.contains('scroll-reveal') &&
+        !el.classList.contains('scroll-reveal-left') &&
+        !el.classList.contains('scroll-reveal-right') &&
+        !el.classList.contains('scroll-reveal-scale')) {
+      el.classList.add('scroll-reveal');
+      
+      // Auto-assign stagger delay to sibling items in grid/lists
+      const siblingIndex = Array.from(el.parentElement.children).indexOf(el);
+      if (siblingIndex > 0 && siblingIndex <= 5) {
+        el.classList.add(`delay-${siblingIndex}`);
+      }
+    }
+  });
+
   const revealElements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale');
   
   if (!revealElements.length) return;
@@ -497,11 +530,18 @@ function initScrollReveal() {
       }
     });
   }, {
-    threshold: 0.12,
+    threshold: 0.1,
     rootMargin: '0px 0px -40px 0px'
   });
 
   revealElements.forEach(el => revealObserver.observe(el));
+
+  // Safety fallback: ensure all content is visible even if user never scrolls or observer glitches
+  setTimeout(() => {
+    document.querySelectorAll('.scroll-reveal:not(.revealed)').forEach(el => {
+      el.classList.add('revealed');
+    });
+  }, 3500);
 }
 
 /* --------------------------------------------------------------------------
