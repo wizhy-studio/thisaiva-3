@@ -72,7 +72,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=3.4">
+  <link rel="stylesheet" href="styles.css?v=3.5">
 </head>
 <body>
 
@@ -161,20 +161,20 @@
         <div class="angels-grid">
           
           <!-- Content Left -->
-          <div class="scroll-reveal-left">
+          <div class="scroll-reveal-left angels-content-col">
             <span class="section-eyebrow"><i class="fa-solid fa-layer-group"></i> ANGEL SPVS</span>
-            <h2 style="font-size: 3rem; color: var(--text-dark); margin-bottom: 1.5rem; line-height: 1.15;">
+            <h2>
               Pool Your Capital
             </h2>
-            <p style="font-size: 1.05rem; color: var(--text-dark-muted); line-height: 1.7; margin-bottom: 2rem;">
+            <p class="angels-lead-text">
               Hit minimum check sizes and get into follow-on rounds by combining commitments with your network. Thisaiva handles the SPV structuring for you.
             </p>
 
-            <div style="background: #ffffff; border-left: 4px solid var(--gold-primary); padding: 1.5rem; border-radius: 0 16px 16px 0; box-shadow: var(--shadow-soft); margin-bottom: 2rem;">
-              <h4 style="font-family: var(--font-sans); font-size: 0.95rem; color: var(--gold-dark); text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.4rem;">
+            <div class="angels-followon-box">
+              <h4>
                 Stay In for the Follow-On
               </h4>
-              <p style="font-size: 0.95rem; color: var(--text-dark); line-height: 1.6; margin-bottom: 0;">
+              <p>
                 Use SPVs to keep participating as the company raises more.
               </p>
             </div>
@@ -329,8 +329,10 @@
           
           <!-- Step 1 -->
           <div class="journey-step-card tilt-card scroll-reveal delay-1">
-            <div class="step-num-badge">01</div>
-            <h3>Submit Deal Details</h3>
+            <div class="journey-step-header">
+              <div class="step-num-badge">01</div>
+              <h3>Submit Deal Details</h3>
+            </div>
             <p>
               Set your investment terms, target allocation, and carry — all in real time.
             </p>
@@ -338,8 +340,10 @@
 
           <!-- Step 2 -->
           <div class="journey-step-card tilt-card scroll-reveal delay-2">
-            <div class="step-num-badge">02</div>
-            <h3>Invite Co-Investors</h3>
+            <div class="journey-step-header">
+              <div class="step-num-badge">02</div>
+              <h3>Invite Co-Investors</h3>
+            </div>
             <p>
               Share your branded link with your network to collect commitments in a few clicks.
             </p>
@@ -347,8 +351,10 @@
 
           <!-- Step 3 -->
           <div class="journey-step-card tilt-card scroll-reveal delay-3">
-            <div class="step-num-badge">03</div>
-            <h3>Automated Escrow Closing</h3>
+            <div class="journey-step-header">
+              <div class="step-num-badge">03</div>
+              <h3>Automated Escrow Closing</h3>
+            </div>
             <p>
               Thisaiva collects investor e-signatures, runs instant KYC/AML checks, and pools capital into an isolated legal escrow account.
             </p>
@@ -356,8 +362,10 @@
 
           <!-- Step 4 -->
           <div class="journey-step-card tilt-card scroll-reveal delay-4">
-            <div class="step-num-badge">04</div>
-            <h3>Single Wire & Cap Table Entry</h3>
+            <div class="journey-step-header">
+              <div class="step-num-badge">04</div>
+              <h3>Single Wire & Cap Table Entry</h3>
+            </div>
             <p>
               Deploy funds in one wire to the startup, securing a clean, single-line institutional entry on the cap table.
             </p>
@@ -387,29 +395,23 @@
     </section>
 
     <!-- SECTION 5: WANT TO CHAT CTA BANNER -->
-    <section class="cta-banner-section" style="padding-top: 0;">
+    <section class="cta-banner-section" style="padding: 4rem 0 5.5rem 0;">
       <div class="container">
-        <div class="cta-banner-card scroll-reveal">
-          
-          <div class="cta-img-wrapper">
-            <picture>
-              <source srcset="assets/cta_investor_terminal.avif" type="image/avif">
-              <source srcset="assets/cta_investor_terminal.webp" type="image/webp">
-              <img src="assets/cta_investor_terminal.jpg" alt="Connect with Thisaiva Angel Syndicate Advisory" width="480" height="320" loading="lazy">
-            </picture>
-          </div>
-
+        <div class="cta-banner-card cta-banner-no-img scroll-reveal">
           <div class="cta-content">
-            <span class="section-eyebrow">DIRECT ADVISORY</span>
-            <h2>Have Questions? Speak with Our Team</h2>
-            <p>
-              Connect with our structuring team to launch your angel syndicate and co-invest with your network.
-            </p>
-            <a href="contact.html" class="btn-gold">
-              Contact Us <i class="fa-solid fa-arrow-right"></i>
-            </a>
+            <div class="cta-text-group">
+              <span class="section-eyebrow">DIRECT ADVISORY</span>
+              <h2>Have Questions? Speak with Our Team</h2>
+              <p>
+                Connect with our structuring team to launch your angel syndicate and co-invest with your network.
+              </p>
+            </div>
+            <div class="cta-action-group">
+              <a href="contact.html" class="btn-gold">
+                Contact Us <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -493,6 +495,6 @@
   </footer>
 
   <!-- JavaScript -->
-  <script src="script.js?v=3.4" defer></script>
+  <script src="script.js?v=3.5" defer></script>
 </body>
 </html>

@@ -1080,6 +1080,52 @@ img {
   margin: 0 auto;
 }
 
+.cta-banner-card.cta-banner-no-img,
+.cta-banner-card:not(:has(.cta-img-wrapper)) {
+  grid-template-columns: 1fr;
+  max-width: 1050px;
+}
+
+.cta-banner-card.cta-banner-no-img .cta-content,
+.cta-banner-card:not(:has(.cta-img-wrapper)) .cta-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 3rem;
+  padding: 3.25rem 4rem;
+}
+
+.cta-text-group {
+  max-width: 680px;
+}
+
+.cta-text-group .section-eyebrow {
+  margin-bottom: 0.35rem;
+}
+
+.cta-text-group h2 {
+  font-size: 2.1rem;
+  color: #ffffff;
+  margin-bottom: 0.6rem;
+  line-height: 1.2;
+}
+
+.cta-text-group p {
+  font-size: 0.98rem;
+  color: var(--text-light-muted);
+  margin-bottom: 0;
+  font-weight: 400;
+  line-height: 1.6;
+}
+
+.cta-action-group {
+  flex-shrink: 0;
+}
+
+.cta-action-group .btn-gold {
+  white-space: nowrap;
+}
+
 .cta-img-wrapper {
   height: 100%;
   min-height: 250px;
@@ -1251,7 +1297,6 @@ img {
   color: var(--text-light);
   padding: 7rem 0;
   position: relative;
-  overflow: hidden;
 }
 
 .map-container {
@@ -1326,11 +1371,11 @@ img {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  background: rgba(13, 46, 38, 0.6);
+  background: rgba(13, 46, 38, 0.75);
   border: 1px solid var(--border-gold);
   border-radius: 50px;
   padding: 0.55rem 1.15rem;
-  color: var(--text-light-muted);
+  color: #e2e8f0;
   font-family: var(--font-sans);
   font-size: 0.85rem;
   font-weight: 600;
@@ -1342,7 +1387,7 @@ img {
 .region-tab-btn:hover {
   color: #ffffff;
   border-color: var(--gold-primary);
-  background: rgba(212, 175, 55, 0.12);
+  background: rgba(212, 175, 55, 0.18);
   transform: translateY(-2px);
 }
 
@@ -1376,6 +1421,42 @@ img {
   border-radius: 20px;
   border: 1px solid rgba(212, 175, 55, 0.25);
   transition: all 0.25s ease;
+}
+
+/* Light / Cream Theme Region Tabs (for media.html Our Global Presence section) */
+.global-presence-section .region-tab-btn {
+  background: #ffffff;
+  border: 1.5px solid rgba(212, 175, 55, 0.45);
+  color: #061a15;
+  box-shadow: 0 2px 8px rgba(15, 23, 42, 0.06);
+}
+
+.global-presence-section .region-tab-btn:hover {
+  background: #ffffff;
+  color: var(--gold-dark);
+  border-color: var(--gold-primary);
+  box-shadow: 0 4px 14px rgba(212, 175, 55, 0.25);
+  transform: translateY(-2px);
+}
+
+.global-presence-section .region-tab-btn .tab-count-badge {
+  background: rgba(212, 175, 55, 0.16);
+  color: var(--gold-dark);
+  border: 1px solid rgba(212, 175, 55, 0.45);
+}
+
+.global-presence-section .region-tab-btn.active {
+  background: var(--gold-gradient);
+  color: #061a15 !important;
+  border-color: var(--gold-primary);
+  box-shadow: 0 4px 15px rgba(212, 175, 55, 0.35);
+  transform: translateY(-2px);
+}
+
+.global-presence-section .region-tab-btn.active .tab-count-badge {
+  background: #061a15;
+  color: var(--gold-primary);
+  border-color: rgba(212, 175, 55, 0.4);
 }
 
 .region-group {
@@ -1577,10 +1658,254 @@ img {
   }
 }
 
-@media (max-width: 680px) {
-  .locations-grid {
-    grid-template-columns: 1fr;
+/* ==========================================================================
+   STICKY STACKING DECKS (MOBILE OPTIMIZATION — TND FORMULA)
+   1. Homepage & Media: Global Office Locations Deck
+   2. For Angels: Strategic Advantages Deck
+   3. For VC: Comprehensive Capabilities Matrix Deck
+   ========================================================================== */
+@media (max-width: 768px) {
+  /* ----------------------------------------------------
+     1. GLOBAL HUBS & LOCATIONS (Homepage & Media Page)
+     ---------------------------------------------------- */
+  .global-section,
+  .global-presence-section {
+    overflow: visible !important;
+    padding: 3.5rem 0 !important;
   }
+
+  .global-section .container,
+  .global-presence-section .container {
+    overflow: visible !important;
+  }
+
+  /* Sticky Horizontal Region Filter Tabs */
+  .region-tabs-bar {
+    position: sticky;
+    top: 4.25rem;
+    z-index: 25;
+    background: rgba(6, 26, 21, 0.95);
+    backdrop-filter: blur(16px);
+    -webkit-backdrop-filter: blur(16px);
+    padding: 0.65rem 0.5rem;
+    border-radius: 16px;
+    border: 1px solid rgba(212, 175, 55, 0.25);
+    margin-bottom: 2rem;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.45);
+  }
+
+  .global-presence-section .region-tabs-bar {
+    background: rgba(248, 246, 240, 0.96) !important;
+    border-color: rgba(13, 46, 38, 0.15) !important;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.08) !important;
+  }
+
+  .region-tabs-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Region Group Container */
+  .region-group {
+    position: relative;
+    margin-bottom: 3.5rem;
+    overflow: visible !important;
+  }
+
+  /* Sticky Region Header (Anchors current region name below tabs) */
+  .region-header {
+    position: sticky;
+    top: 7.6rem;
+    z-index: 20;
+    background: rgba(6, 26, 21, 0.96);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 0.75rem 1rem;
+    border-radius: 14px;
+    border: 1px solid rgba(212, 175, 55, 0.3);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+    margin-bottom: 1.5rem;
+  }
+
+  .global-presence-section .region-header {
+    background: rgba(248, 246, 240, 0.96) !important;
+    border-color: rgba(13, 46, 38, 0.18) !important;
+    box-shadow: 0 6px 20px rgba(15, 23, 42, 0.1) !important;
+  }
+
+  .region-title {
+    font-size: 1.35rem;
+  }
+
+  /* Stacking Cards Column Deck */
+  .locations-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    overflow: visible !important;
+  }
+
+  /* Individual Sticky Stacking Card */
+  .location-card {
+    position: sticky;
+    top: calc(11.25rem + min(var(--card-index, 0) * 10px, 90px));
+    margin-bottom: 2.25rem;
+    background: linear-gradient(145deg, #0e342b 0%, #061b16 100%) !important;
+    border: 1.5px solid var(--border-gold) !important;
+    border-radius: 20px;
+    box-shadow: 
+      0 -8px 24px rgba(0, 0, 0, 0.5),
+      0 16px 36px rgba(0, 0, 0, 0.65),
+      inset 0 1px 1px rgba(212, 175, 55, 0.3) !important;
+    will-change: transform, opacity;
+    transform-origin: center top;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .global-section .location-card.scroll-reveal,
+  .global-presence-section .location-card.scroll-reveal {
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  .locations-grid .location-card:nth-child(1) { --card-index: 0; z-index: 1; }
+  .locations-grid .location-card:nth-child(2) { --card-index: 1; z-index: 2; }
+  .locations-grid .location-card:nth-child(3) { --card-index: 2; z-index: 3; }
+  .locations-grid .location-card:nth-child(4) { --card-index: 3; z-index: 4; }
+  .locations-grid .location-card:nth-child(5) { --card-index: 4; z-index: 5; }
+  .locations-grid .location-card:nth-child(6) { --card-index: 5; z-index: 6; }
+  .locations-grid .location-card:nth-child(7) { --card-index: 6; z-index: 7; }
+  .locations-grid .location-card:nth-child(8) { --card-index: 7; z-index: 8; }
+  .locations-grid .location-card:nth-child(9) { --card-index: 8; z-index: 9; }
+  .locations-grid .location-card:nth-child(10) { --card-index: 9; z-index: 10; }
+  .locations-grid .location-card:nth-child(11) { --card-index: 10; z-index: 11; }
+  .locations-grid .location-card:nth-child(12) { --card-index: 11; z-index: 12; }
+
+  /* ----------------------------------------------------
+     2. STRATEGIC ADVANTAGES (For Angels Page)
+     ---------------------------------------------------- */
+  .pillars-section {
+    overflow: visible !important;
+    padding: 3.5rem 0 !important;
+  }
+
+  .pillars-section .container {
+    overflow: visible !important;
+  }
+
+  .pillars-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    overflow: visible !important;
+    margin-top: 2rem !important;
+  }
+
+  .pillar-card {
+    position: sticky;
+    top: calc(5.5rem + min(var(--card-index, 0) * 12px, 72px));
+    margin-bottom: 2rem;
+    background: #ffffff;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    border-radius: 20px;
+    box-shadow: 
+      0 -6px 20px rgba(15, 23, 42, 0.08),
+      0 16px 36px rgba(15, 23, 42, 0.12);
+    will-change: transform, opacity;
+    transform-origin: center top;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .pillar-card.scroll-reveal {
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  .pillars-grid .pillar-card:nth-child(1) { --card-index: 0; z-index: 1; }
+  .pillars-grid .pillar-card:nth-child(2) { --card-index: 1; z-index: 2; }
+  .pillars-grid .pillar-card:nth-child(3) { --card-index: 2; z-index: 3; }
+  .pillars-grid .pillar-card:nth-child(4) { --card-index: 3; z-index: 4; }
+  .pillars-grid .pillar-card:nth-child(5) { --card-index: 4; z-index: 5; }
+  .pillars-grid .pillar-card:nth-child(6) { --card-index: 5; z-index: 6; }
+
+  /* ----------------------------------------------------
+     3. VC CAPABILITIES MATRIX (For VC Page)
+     ---------------------------------------------------- */
+  .vc-capabilities-section {
+    overflow: visible !important;
+    padding: 3.5rem 0 !important;
+  }
+
+  .vc-capabilities-section .container {
+    overflow: visible !important;
+  }
+
+  /* Sticky Capability Filter Pills Bar */
+  .vc-capabilities-section .filter-pills-bar {
+    position: sticky;
+    top: 4.25rem;
+    z-index: 25;
+    background: rgba(248, 246, 240, 0.95);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    padding: 0.65rem 0.5rem;
+    border-radius: 50px;
+    border: 1px solid rgba(15, 23, 42, 0.08);
+    box-shadow: 0 4px 15px rgba(15, 23, 42, 0.06);
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    scrollbar-width: none;
+    margin-bottom: 2rem;
+  }
+
+  .vc-capabilities-section .filter-pills-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .vc-matrix-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    position: relative;
+    overflow: visible !important;
+    margin-top: 1.5rem !important;
+  }
+
+  .vc-capability-card {
+    position: sticky !important;
+    top: calc(8.5rem + min(var(--card-index, 0) * 10px, 90px));
+    margin-bottom: 2rem;
+    background: #ffffff !important;
+    border: 1.5px solid rgba(212, 175, 55, 0.3) !important;
+    border-radius: 20px;
+    box-shadow: 
+      0 -6px 20px rgba(15, 23, 42, 0.08),
+      0 16px 36px rgba(15, 23, 42, 0.12);
+    will-change: transform, opacity;
+    transform-origin: center top;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .vc-capability-card.scroll-reveal {
+    opacity: 1 !important;
+    filter: none !important;
+  }
+
+  .vc-matrix-grid .vc-capability-card:nth-child(1) { --card-index: 0; z-index: 1; }
+  .vc-matrix-grid .vc-capability-card:nth-child(2) { --card-index: 1; z-index: 2; }
+  .vc-matrix-grid .vc-capability-card:nth-child(3) { --card-index: 2; z-index: 3; }
+  .vc-matrix-grid .vc-capability-card:nth-child(4) { --card-index: 3; z-index: 4; }
+  .vc-matrix-grid .vc-capability-card:nth-child(5) { --card-index: 4; z-index: 5; }
+  .vc-matrix-grid .vc-capability-card:nth-child(6) { --card-index: 5; z-index: 6; }
+  .vc-matrix-grid .vc-capability-card:nth-child(7) { --card-index: 6; z-index: 7; }
+  .vc-matrix-grid .vc-capability-card:nth-child(8) { --card-index: 7; z-index: 8; }
+  .vc-matrix-grid .vc-capability-card:nth-child(9) { --card-index: 8; z-index: 9; }
+  .vc-matrix-grid .vc-capability-card:nth-child(10) { --card-index: 9; z-index: 10; }
 }
 
 @keyframes ping {
@@ -2081,6 +2406,14 @@ img {
 
   .cta-banner-card {
     grid-template-columns: 1fr;
+  }
+
+  .cta-banner-card.cta-banner-no-img .cta-content,
+  .cta-banner-card:not(:has(.cta-img-wrapper)) .cta-content {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1.75rem;
+    padding: 2.25rem 1.75rem;
   }
 
   .cta-img-wrapper {
@@ -3323,21 +3656,61 @@ img {
 .angels-overview-section {
   background-color: var(--bg-cream);
   color: var(--text-dark);
-  padding: 7rem 0;
+  padding: 6.5rem 0;
 }
 
 .angels-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 4rem;
+  gap: 3.5rem;
   align-items: center;
+}
+
+.angels-content-col h2 {
+  font-size: 2.75rem;
+  color: var(--text-dark);
+  margin-bottom: 1.25rem;
+  line-height: 1.15;
+}
+
+.angels-lead-text {
+  font-size: 1.05rem;
+  color: var(--text-dark-muted);
+  line-height: 1.75;
+  margin-bottom: 1.75rem;
+}
+
+.angels-followon-box {
+  background: #ffffff;
+  border-left: 4px solid var(--gold-primary);
+  padding: 1.5rem;
+  border-radius: 0 16px 16px 0;
+  box-shadow: var(--shadow-soft);
+  margin-bottom: 2rem;
+}
+
+.angels-followon-box h4 {
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--gold-dark);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 0.4rem;
+}
+
+.angels-followon-box p {
+  font-size: 0.95rem;
+  color: var(--text-dark);
+  line-height: 1.6;
+  margin-bottom: 0;
 }
 
 .syndicate-highlight-card {
   background: var(--bg-dark);
   border: 1px solid var(--border-gold);
   border-radius: 24px;
-  padding: 3rem;
+  padding: 2.25rem 2.25rem;
   box-shadow: var(--shadow-dark);
   color: var(--text-light);
   position: relative;
@@ -3368,21 +3741,28 @@ img {
   color: var(--gold-primary);
   letter-spacing: 0.15em;
   text-transform: uppercase;
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.25rem;
 }
 
 .syndicate-highlight-card h3 {
-  font-size: 2.2rem;
+  font-size: 1.75rem;
   color: #ffffff;
-  margin-bottom: 1.25rem;
-  line-height: 1.2;
+  margin-bottom: 0.75rem;
+  line-height: 1.25;
 }
 
 .syndicate-highlight-card p {
-  font-size: 1.05rem;
+  font-size: 0.98rem;
   color: var(--text-light-muted);
-  line-height: 1.7;
-  margin-bottom: 2rem;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.syndicate-highlight-card img {
+  width: 100%;
+  max-height: 220px;
+  object-fit: cover;
+  display: block;
 }
 
 /* Strategic Pillars Section */
@@ -3505,6 +3885,25 @@ img {
   box-shadow: 0 20px 45px rgba(0, 0, 0, 0.5), inset 0 1px 1px rgba(212, 175, 55, 0.35);
 }
 
+.journey-step-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.15rem;
+}
+
+.journey-step-header .step-num-badge {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.journey-step-header h3 {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+  color: #ffffff;
+  line-height: 1.25;
+}
+
 .step-num-badge {
   width: 44px;
   height: 44px;
@@ -3522,7 +3921,7 @@ img {
 }
 
 .journey-step-card h3 {
-  font-size: 1.45rem;
+  font-size: 1.35rem;
   color: #ffffff;
   margin-bottom: 0.85rem;
   line-height: 1.25;
@@ -3557,6 +3956,25 @@ img {
   transform: translateY(-8px);
   border-color: var(--border-gold);
   box-shadow: var(--shadow-hover);
+}
+
+.c-pillar-header-row {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  margin-bottom: 1.15rem;
+}
+
+.c-pillar-header-row .c-pillar-icon {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.c-pillar-header-row h3 {
+  margin-bottom: 0;
+  font-size: 1.25rem;
+  color: var(--text-dark);
+  line-height: 1.25;
 }
 
 .c-pillar-icon {
@@ -5152,6 +5570,28 @@ img {
   border-color: rgba(212, 175, 55, 0.4);
 }
 
+.comm-card-header {
+  display: flex;
+  align-items: center;
+  gap: 1.15rem;
+  margin-bottom: 1.25rem;
+}
+
+.comm-card-header .comm-icon {
+  margin-bottom: 0;
+  flex-shrink: 0;
+}
+
+.comm-card-title-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.comm-card-title-group .section-eyebrow {
+  margin-bottom: 0.25rem;
+  font-size: 0.78rem;
+}
+
 .comm-icon {
   width: 52px;
   height: 52px;
@@ -5172,10 +5612,11 @@ img {
   transform: scale(1.1);
 }
 
-.community-feature-card h3 {
-  font-size: 1.65rem;
+.community-feature-card h3,
+.comm-card-title-group h3 {
+  font-size: 1.35rem;
   color: var(--text-dark);
-  margin-bottom: 1rem;
+  margin-bottom: 0;
   line-height: 1.25;
 }
 
@@ -6272,19 +6713,21 @@ img {
 }
 
 /* ==========================================================================
-   SCROLL TO TOP BUTTON (EXACT SHREE-INT-3 LIQUID WATER WAVE FILL)
+   SCROLL TO TOP BUTTON (MINIMAL TRANSPARENT OUTLINE & ARROW)
+   Fully transparent background so any underlying text/content remains visible
    ========================================================================== */
 .scroll-top {
   position: fixed;
   bottom: 30px;
   right: 30px;
   z-index: 1050;
-  width: 50px;
-  height: 50px;
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
-  background-color: #061a15;
-  border: 1.5px solid var(--border-gold);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.45), 0 0 15px rgba(212, 175, 55, 0.2);
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 1.5px solid var(--gold-primary);
+  box-shadow: none !important;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -6292,27 +6735,14 @@ img {
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
-  transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease, box-shadow 0.3s ease;
-  overflow: hidden; /* Critical for fill overlay */
+  transition: opacity 0.35s ease, visibility 0.35s ease, transform 0.35s ease, border-color 0.25s ease, background-color 0.25s ease;
   padding: 0;
   touch-action: manipulation;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
   -webkit-user-select: none;
-}
-
-/* Glass shine/water reflection highlight */
-.scroll-top::after {
-  content: '';
-  position: absolute;
-  top: 2px;
-  left: 2px;
-  width: calc(100% - 4px);
-  height: calc(100% - 4px);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.35) 0%, rgba(255, 255, 255, 0.08) 40%, transparent 60%);
-  border-radius: 50%;
-  pointer-events: none;
-  z-index: 3;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 .scroll-top--visible {
@@ -6323,77 +6753,21 @@ img {
 
 .scroll-top:hover {
   transform: translateY(-4px) scale(1.06);
-  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6), 0 0 25px rgba(16, 185, 129, 0.4);
-  border-color: #10b981;
-}
-
-.scroll-top__fill {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  height: 0%; /* JS Controlled height */
-  background: linear-gradient(180deg, #10b981 0%, #064e3b 100%);
-  transition: height 0.15s ease-out;
-  z-index: 0;
-}
-
-/* Primary Wave Layer */
-.scroll-top__fill::before {
-  content: '';
-  position: absolute;
-  top: -8px; /* sits on top of the fill */
-  left: 0;
-  width: 200%;
-  height: 12px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 28'%3E%3Cpath d='M0 15 C 15 15, 15 5, 30 5 C 45 5, 45 15, 60 15 C 75 15, 75 5, 90 5 C 105 5, 105 15, 120 15 L 120 28 L 0 28 Z' fill='%2310B981'/%3E%3C/svg%3E");
-  background-size: 50% 100%;
-  background-repeat: repeat-x;
-  animation: water-wave-move 1.5s infinite linear;
-  z-index: 2;
-}
-
-/* Secondary Wave Layer for depth/reflections */
-.scroll-top__fill::after {
-  content: '';
-  position: absolute;
-  top: -6px;
-  left: 0;
-  width: 200%;
-  height: 12px;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 28'%3E%3Cpath d='M0 15 C 15 15, 15 5, 30 5 C 45 5, 45 15, 60 15 C 75 15, 75 5, 90 5 C 105 5, 105 15, 120 15 L 120 28 L 0 28 Z' fill='%23D4AF37' opacity='0.6'/%3E%3C/svg%3E");
-  background-size: 50% 100%;
-  background-repeat: repeat-x;
-  animation: water-wave-move 2.2s infinite linear reverse;
-  z-index: 1;
-}
-
-@keyframes water-wave-move {
-  0% {
-    transform: translateX(0);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+  border-color: #ffffff;
+  background: rgba(212, 175, 55, 0.12) !important;
 }
 
 .scroll-top__arrow {
   font-size: 1.15rem;
-  color: #ffffff;
-  font-weight: bold;
-  z-index: 4; /* above the z-index 3 glass reflection */
+  color: var(--gold-primary);
   transition: color 0.25s ease, transform 0.25s ease;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.scroll-top--filled .scroll-top__arrow {
-  color: #ffffff;
-  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
-}
-
 .scroll-top:hover .scroll-top__arrow {
+  color: #ffffff;
   transform: translateY(-2px);
 }
 

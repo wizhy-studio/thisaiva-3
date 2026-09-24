@@ -8,6 +8,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initMobileMenu();
   initStatCounters();
   initGlobalMap();
+  initMobileLocationStacking();
   initFormHandlers();
   initScrollReveal();
   initFaqAccordion();
@@ -805,6 +806,104 @@ function initGlobalMap() {
 }
 
 /* --------------------------------------------------------------------------
+   4.1 STICKY STACKING DECK PHYSICS FOR MOBILE SECTIONS (TND FORMULA)
+   Applies to:
+   1. Homepage & Media: Global Hubs / Office Locations Deck
+   2. For Angels: Strategic Advantages Deck
+   3. For VC: Comprehensive Capabilities Matrix Deck
+   -------------------------------------------------------------------------- */
+function initMobileLocationStacking() {
+  const deckConfigs = [
+    { containerSelector: '.global-section .region-group, .global-presence-section .region-group', cardSelector: '.location-card' },
+    { containerSelector: '.pillars-section .pillars-grid', cardSelector: '.pillar-card' },
+    { containerSelector: '.vc-capabilities-section .vc-matrix-grid', cardSelector: '.vc-capability-card' }
+  ];
+
+  // Helper to re-index visible cards
+  const reindexCards = () => {
+    deckConfigs.forEach(({ containerSelector, cardSelector }) => {
+      document.querySelectorAll(containerSelector).forEach(container => {
+        const visibleCards = Array.from(container.querySelectorAll(cardSelector)).filter(c => c.style.display !== 'none');
+        visibleCards.forEach((card, idx) => {
+          card.style.setProperty('--card-index', idx);
+        });
+      });
+    });
+  };
+
+  reindexCards();
+
+  const updateCardTransforms = () => {
+    if (window.innerWidth > 768) {
+      deckConfigs.forEach(({ containerSelector, cardSelector }) => {
+        document.querySelectorAll(containerSelector).forEach(container => {
+          container.querySelectorAll(cardSelector).forEach(card => {
+            card.style.transform = '';
+            card.style.opacity = '';
+          });
+        });
+      });
+      return;
+    }
+
+    deckConfigs.forEach(({ containerSelector, cardSelector }) => {
+      document.querySelectorAll(containerSelector).forEach(container => {
+        if (container.style.display === 'none') return;
+
+        const cards = Array.from(container.querySelectorAll(cardSelector)).filter(c => c.style.display !== 'none');
+        const totalCards = cards.length;
+
+        cards.forEach((card, index) => {
+          const nextCard = cards[index + 1];
+          if (nextCard) {
+            const rect = card.getBoundingClientRect();
+            const nextRect = nextCard.getBoundingClientRect();
+            const cardHeight = rect.height || 180;
+            
+            // Calculate overlap progress
+            const overlap = Math.max(0, rect.bottom - nextRect.top);
+            const progress = Math.min(1, Math.max(0, overlap / cardHeight));
+
+            // Scale down cards below subsequent cards
+            const maxScaleReduction = Math.min((totalCards - 1 - index) * 0.025, 0.08);
+            const currentScale = 1 - (progress * maxScaleReduction);
+            const currentOpacity = 1 - (progress * 0.08);
+
+            card.style.transform = `scale(${currentScale})`;
+            card.style.opacity = currentOpacity;
+          } else {
+            card.style.transform = 'scale(1)';
+            card.style.opacity = '1';
+          }
+        });
+      });
+    });
+  };
+
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateCardTransforms);
+  }, { passive: true });
+
+  window.addEventListener('resize', () => {
+    reindexCards();
+    requestAnimationFrame(updateCardTransforms);
+  }, { passive: true });
+
+  // Update when region tabs or capability filter pills change
+  const filterTriggers = document.querySelectorAll('.region-tab-btn, .filter-pill');
+  filterTriggers.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setTimeout(() => {
+        reindexCards();
+        updateCardTransforms();
+      }, 250);
+    });
+  });
+
+  updateCardTransforms();
+}
+
+/* --------------------------------------------------------------------------
    5. MODAL SYSTEM & FORM HANDLERS
    -------------------------------------------------------------------------- */
 function openModal(contextTitle) {
@@ -876,7 +975,6 @@ function showToast(message) {
    -------------------------------------------------------------------------- */
 function initBackToTop() {
   let btn = document.getElementById('scrollTop');
-  let fill = document.getElementById('scrollTopFill');
 
   if (!btn) {
     btn = document.createElement('button');
@@ -884,11 +982,9 @@ function initBackToTop() {
     btn.className = 'scroll-top';
     btn.setAttribute('aria-label', 'Scroll to top');
     btn.innerHTML = `
-      <div class="scroll-top__fill" id="scrollTopFill"></div>
       <span class="scroll-top__arrow"><i class="fa-solid fa-arrow-up"></i></span>
     `;
     document.body.appendChild(btn);
-    fill = document.getElementById('scrollTopFill');
   }
 
   let ticking = false;
@@ -897,14 +993,6 @@ function initBackToTop() {
     if (!ticking) {
       requestAnimationFrame(() => {
         const scrollTop = window.scrollY || document.documentElement.scrollTop;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-
-        if (fill) {
-          fill.style.height = scrollPercent + '%';
-        }
-
-        btn.classList.toggle('scroll-top--filled', scrollPercent > 50);
         btn.classList.toggle('scroll-top--visible', scrollTop > 250);
         ticking = false;
       });

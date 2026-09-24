@@ -72,7 +72,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=3.4">
+  <link rel="stylesheet" href="styles.css?v=3.5">
 </head>
 <body>
 
@@ -229,12 +229,16 @@
           
           <!-- Card 1 -->
           <div class="community-feature-card scroll-reveal delay-1">
-            <div>
-              <div class="comm-icon">
-                <i class="fa-solid fa-people-roof"></i>
+            <div class="comm-card-inner">
+              <div class="comm-card-header">
+                <div class="comm-icon">
+                  <i class="fa-solid fa-people-roof"></i>
+                </div>
+                <div class="comm-card-title-group">
+                  <span class="section-eyebrow">SYNDICATION</span>
+                  <h3>Welcome to an Exclusive Community</h3>
+                </div>
               </div>
-              <span class="section-eyebrow" style="margin-bottom:0.25rem;">SYNDICATION</span>
-              <h3>Welcome to an Exclusive Community</h3>
               <p>
                 Become a part of the exclusive dealmaker's club, where you'll have the opportunity to continue funding the next generation of unicorns alongside top-tier global allocators.
               </p>
@@ -243,12 +247,16 @@
 
           <!-- Card 2 -->
           <div class="community-feature-card scroll-reveal delay-2">
-            <div>
-              <div class="comm-icon">
-                <i class="fa-solid fa-newspaper"></i>
+            <div class="comm-card-inner">
+              <div class="comm-card-header">
+                <div class="comm-icon">
+                  <i class="fa-solid fa-newspaper"></i>
+                </div>
+                <div class="comm-card-title-group">
+                  <span class="section-eyebrow">MONTHLY ROUNDUP</span>
+                  <h3>Experience the Benefits of VC Highlight</h3>
+                </div>
               </div>
-              <span class="section-eyebrow" style="margin-bottom:0.25rem;">MONTHLY ROUNDUP</span>
-              <h3>Experience the Benefits of VC Highlight</h3>
               <p>
                 Thisaiva presents VC Highlight, a monthly roundup of the latest events and advancements in the VC industry. Stay informed with up-to-date information, gain access to exclusive events, and be among the first to discover our new offerings.
               </p>
@@ -257,12 +265,16 @@
 
           <!-- Card 3 -->
           <div class="community-feature-card scroll-reveal delay-3">
-            <div>
-              <div class="comm-icon">
-                <i class="fa-solid fa-key"></i>
+            <div class="comm-card-inner">
+              <div class="comm-card-header">
+                <div class="comm-icon">
+                  <i class="fa-solid fa-key"></i>
+                </div>
+                <div class="comm-card-title-group">
+                  <span class="section-eyebrow">GLOBAL ACCESS</span>
+                  <h3>Unlock Your Access Today</h3>
+                </div>
               </div>
-              <span class="section-eyebrow" style="margin-bottom:0.25rem;">GLOBAL ACCESS</span>
-              <h3>Unlock Your Access Today</h3>
               <p>
                 Join VC Highlight and elevate your presence in the vibrant world of venture capital. Connect with like-minded peers, co-invest in high-conviction SPVs, and accelerate your fund operations.
               </p>
@@ -354,20 +366,26 @@
         <div class="c-pillars-grid">
           
           <div class="c-pillar-card scroll-reveal delay-1">
-            <div class="c-pillar-icon"><i class="fa-solid fa-handshake"></i></div>
-            <h3>Collaborative Deal Flow Sharing</h3>
+            <div class="c-pillar-header-row">
+              <div class="c-pillar-icon"><i class="fa-solid fa-handshake"></i></div>
+              <h3>Collaborative Deal Flow Sharing</h3>
+            </div>
             <p>Access high-conviction co-investment opportunities alongside tier-1 syndicate leads and verified funds.</p>
           </div>
 
           <div class="c-pillar-card scroll-reveal delay-2">
-            <div class="c-pillar-icon"><i class="fa-solid fa-comments"></i></div>
-            <h3>Private Partner Forums</h3>
+            <div class="c-pillar-header-row">
+              <div class="c-pillar-icon"><i class="fa-solid fa-comments"></i></div>
+              <h3>Private Partner Forums</h3>
+            </div>
             <p>Exchange tactical structuring intelligence and market sentiment with active venture operators in private salons.</p>
           </div>
 
           <div class="c-pillar-card scroll-reveal delay-3">
-            <div class="c-pillar-icon"><i class="fa-solid fa-users-gear"></i></div>
-            <h3>Transforming Stakeholders into Strategic Shareholders</h3>
+            <div class="c-pillar-header-row">
+              <div class="c-pillar-icon"><i class="fa-solid fa-users-gear"></i></div>
+              <h3>Transforming Stakeholders into Strategic Shareholders</h3>
+            </div>
             <p>Consolidate diverse angel networks and founders into unified investment vehicles with frictionless legal governance.</p>
           </div>
 
@@ -422,27 +440,21 @@
     <!-- SECTION 5: WANT TO CHAT CTA BANNER -->
     <section class="cta-banner-section">
       <div class="container">
-        <div class="cta-banner-card scroll-reveal">
-          
-          <div class="cta-img-wrapper">
-            <picture>
-              <source srcset="assets/cta_investor_terminal.avif" type="image/avif">
-              <source srcset="assets/cta_investor_terminal.webp" type="image/webp">
-              <img src="assets/cta_investor_terminal.jpg" alt="Connect with Thisaiva Community Team" width="480" height="320" loading="lazy">
-            </picture>
-          </div>
-
+        <div class="cta-banner-card cta-banner-no-img scroll-reveal">
           <div class="cta-content">
-            <span class="section-eyebrow">DIRECT ADVISORY</span>
-            <h2>Have Questions? Speak with Our Team</h2>
-            <p>
-              Connect with our admissions desk to join an elite network of global venture dealmakers.
-            </p>
-            <a href="contact.html" class="btn-gold">
-              Contact Us <i class="fa-solid fa-arrow-right"></i>
-            </a>
+            <div class="cta-text-group">
+              <span class="section-eyebrow">DIRECT ADVISORY</span>
+              <h2>Have Questions? Speak with Our Team</h2>
+              <p>
+                Connect with our admissions desk to join an elite network of global venture dealmakers.
+              </p>
+            </div>
+            <div class="cta-action-group">
+              <a href="contact.html" class="btn-gold">
+                Contact Us <i class="fa-solid fa-arrow-right"></i>
+              </a>
+            </div>
           </div>
-
         </div>
       </div>
     </section>
@@ -532,6 +544,6 @@
   </div>
 
   <!-- JavaScript -->
-  <script src="script.js?v=3.4" defer></script>
+  <script src="script.js?v=3.5" defer></script>
 </body>
 </html>
