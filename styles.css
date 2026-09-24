@@ -596,6 +596,23 @@ img {
   animation: heroFadeUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.22s backwards;
 }
 
+/* Universal Inner-Hero Page-Load Entrance (All Inner Pages) */
+.inner-hero-container > * {
+  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.inner-hero-container .inner-breadcrumb {
+  animation-delay: 0.08s;
+}
+
+.inner-hero-container .inner-hero-title {
+  animation-delay: 0.18s;
+}
+
+.inner-hero-container .inner-hero-subtitle {
+  animation-delay: 0.28s;
+}
+
 @keyframes heroFadeUp {
   from {
     opacity: 0;
@@ -2940,6 +2957,14 @@ img {
 .scroll-reveal-scale.revealed {
   opacity: 1;
   transform: translate3d(0, 0, 0) scale(1);
+  filter: blur(0px);
+}
+
+.scroll-reveal.revealed:not(:hover),
+.scroll-reveal-left.revealed:not(:hover),
+.scroll-reveal-right.revealed:not(:hover),
+.scroll-reveal-scale.revealed:not(:hover) {
+  opacity: 1;
   filter: blur(0px);
 }
 

@@ -482,28 +482,86 @@ function initActivePageNav() {
 }
 
 /* --------------------------------------------------------------------------
-   1.1 SCROLL REVEAL OBSERVER
+   1.1 SCROLL REVEAL OBSERVER (SKILLFUNNEL-STYLE GPU TRANSITIONS)
    -------------------------------------------------------------------------- */
 function initScrollReveal() {
-  // Automatically equip content blocks below the hero with scroll-reveal classes
-  const contentBlocks = document.querySelectorAll(
-    'section:not(.hero) .section-header, ' +
-    'section:not(.hero) .container > h2, ' +
-    'section:not(.hero) .section-eyebrow, ' +
-    '.invest-card, ' +
-    '.vc-capability-card, ' +
-    '.c-pillar-card, ' +
-    '.pillars-grid > div, ' +
-    '.journey-grid > div, ' +
-    '.why-card, ' +
-    '.blog-card, ' +
-    '.faq-item, ' +
-    '.mission-card, ' +
-    '.objective-card, ' +
-    '.metric-item'
-  );
+  // Comprehensive selectors targeting headers, cards, grids and content blocks across all 9 pages
+  const contentSelectors = [
+    'section:not(.hero) .section-header',
+    'section:not(.hero) .container > h2',
+    'section:not(.hero) .section-eyebrow',
+    'section:not(.hero) .section-description',
+    '.metrics-card',
+    '.metric-item',
+    '.about-grid > div',
+    '.about-dual-card-grid > div',
+    '.mission-card',
+    '.objective-card',
+    '.why-card',
+    '.why-choose-grid > div',
+    '.testimonials-grid > div',
+    '.testimonial-card',
+    '.invest-card',
+    '.investment-cards > div',
+    '.vc-capability-card',
+    '.vc-matrix-grid > div',
+    '.faq-accordion-item',
+    '.lux-feature-item',
+    '.simulator-box',
+    '.sim-result-card',
+    '.founder-grid > div',
+    '.captable-showcase-box',
+    '.advantages-grid > div',
+    '.advantage-card',
+    '.angels-grid > div',
+    '.syndicate-highlight-card',
+    '.pillar-card',
+    '.pillars-grid > div',
+    '.journey-step-card',
+    '.journey-grid > div',
+    '.syndicate-cta-box',
+    '.vip-metal-card-wrapper',
+    '.community-top-grid > div',
+    '.community-cards-grid > div',
+    '.community-feature-card',
+    '.digest-showcase-grid > div',
+    '.digest-edition-box',
+    '.c-pillars-grid > div',
+    '.c-pillar-card',
+    '.membership-form-card',
+    '.migrate-top-grid > div',
+    '.migrate-pipeline-card',
+    '.migrate-pillars-grid > div',
+    '.migrate-feature-card',
+    '.process-interactive-grid > div',
+    '.process-step-box',
+    '.readiness-card',
+    '.clock-card',
+    '.locations-grid > div',
+    '.location-card',
+    '.media-bento-grid > div',
+    '.media-spotlight-card',
+    '.press-article-item',
+    '.contact-suite-grid > div',
+    '.contact-concierge-card',
+    '.contact-interactive-form-box',
+    '.exec-desk-card',
+    '.office-hud-grid > div',
+    '.office-hud-card',
+    '.sla-trust-grid > div',
+    '.sla-badge-box',
+    '.blog-grid > div',
+    '.blog-card',
+    '.cta-banner-card',
+    '.legal-section .container > *'
+  ].join(', ');
+
+  const contentBlocks = document.querySelectorAll(contentSelectors);
 
   contentBlocks.forEach((el) => {
+    // Avoid double tagging or hero section tagging (hero uses CSS entrance animation)
+    if (el.closest('.hero-content') || el.closest('.inner-hero-container')) return;
+
     if (!el.classList.contains('scroll-reveal') &&
         !el.classList.contains('scroll-reveal-left') &&
         !el.classList.contains('scroll-reveal-right') &&
@@ -511,9 +569,12 @@ function initScrollReveal() {
       el.classList.add('scroll-reveal');
       
       // Auto-assign stagger delay to sibling items in grid/lists
-      const siblingIndex = Array.from(el.parentElement.children).indexOf(el);
-      if (siblingIndex > 0 && siblingIndex <= 5) {
-        el.classList.add(`delay-${siblingIndex}`);
+      if (el.parentElement) {
+        const siblings = Array.from(el.parentElement.children);
+        const index = siblings.indexOf(el);
+        if (index > 0 && index <= 5) {
+          el.classList.add(`delay-${index}`);
+        }
       }
     }
   });
@@ -521,6 +582,12 @@ function initScrollReveal() {
   const revealElements = document.querySelectorAll('.scroll-reveal, .scroll-reveal-left, .scroll-reveal-right, .scroll-reveal-scale');
   
   if (!revealElements.length) return;
+
+  // Fallback for browsers without IntersectionObserver
+  if (!('IntersectionObserver' in window)) {
+    revealElements.forEach(el => el.classList.add('revealed'));
+    return;
+  }
 
   const revealObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
@@ -530,18 +597,11 @@ function initScrollReveal() {
       }
     });
   }, {
-    threshold: 0.1,
-    rootMargin: '0px 0px -40px 0px'
+    threshold: 0.08,
+    rootMargin: '0px 0px -20px 0px'
   });
 
   revealElements.forEach(el => revealObserver.observe(el));
-
-  // Safety fallback: ensure all content is visible even if user never scrolls or observer glitches
-  setTimeout(() => {
-    document.querySelectorAll('.scroll-reveal:not(.revealed)').forEach(el => {
-      el.classList.add('revealed');
-    });
-  }, 3500);
 }
 
 /* --------------------------------------------------------------------------
