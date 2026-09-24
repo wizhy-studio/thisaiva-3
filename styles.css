@@ -571,6 +571,44 @@ img {
   transform: scale(1.04);
 }
 
+/* Hero Page-Load Cinematic Entrance (Skillfunnel / Apple style) */
+.hero-content > * {
+  animation: heroFadeUp 0.85s cubic-bezier(0.16, 1, 0.3, 1) backwards;
+}
+
+.hero-content .section-eyebrow {
+  animation-delay: 0.08s;
+}
+
+.hero-content .hero-title {
+  animation-delay: 0.18s;
+}
+
+.hero-content .hero-description {
+  animation-delay: 0.28s;
+}
+
+.hero-content .hero-buttons {
+  animation-delay: 0.38s;
+}
+
+.hero-visual {
+  animation: heroFadeUp 0.95s cubic-bezier(0.16, 1, 0.3, 1) 0.22s backwards;
+}
+
+@keyframes heroFadeUp {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 35px, 0);
+    filter: blur(6px);
+  }
+  to {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
+    filter: blur(0px);
+  }
+}
+
 .hero-badge {
   position: absolute;
   top: 10%;
@@ -2911,19 +2949,6 @@ img {
 .delay-3 { transition-delay: 0.24s; }
 .delay-4 { transition-delay: 0.32s; }
 .delay-5 { transition-delay: 0.40s; }
-
-/* Accessibility & ADA Compliance: Instant reveal for reduced-motion preferences */
-@media (prefers-reduced-motion: reduce) {
-  .scroll-reveal,
-  .scroll-reveal-left,
-  .scroll-reveal-right,
-  .scroll-reveal-scale {
-    opacity: 1 !important;
-    transform: none !important;
-    filter: none !important;
-    transition: none !important;
-  }
-}
 
 /* ==========================================================================
    ABOUT US PAGE SPECIFIC STYLES
