@@ -514,6 +514,15 @@ function initMobileMenu() {
 
   if (!hamburgerBtn || !navLinks) return;
 
+  // Create or get semi-transparent backdrop for mobile menu
+  let navBackdrop = document.getElementById('navBackdrop');
+  if (!navBackdrop) {
+    navBackdrop = document.createElement('div');
+    navBackdrop.id = 'navBackdrop';
+    navBackdrop.className = 'nav-backdrop';
+    document.body.appendChild(navBackdrop);
+  }
+
   // Track menu state
   let menuOpen = false;
 
@@ -521,9 +530,8 @@ function initMobileMenu() {
     menuOpen = true;
     navLinks.classList.add('active');
     navLinks.style.display = 'flex';
+    if (navBackdrop) navBackdrop.classList.add('active');
     hamburgerBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-    document.body.style.overflow = 'hidden';
-    document.documentElement.style.overflow = 'hidden';
     if (navbar) navbar.classList.add('menu-open');
   }
 
@@ -531,6 +539,7 @@ function initMobileMenu() {
     menuOpen = false;
     navLinks.classList.remove('active');
     navLinks.style.display = 'none';
+    if (navBackdrop) navBackdrop.classList.remove('active');
     hamburgerBtn.innerHTML = '<i class="fa-solid fa-bars"></i>';
     document.body.style.overflow = '';
     document.documentElement.style.overflow = '';
@@ -548,6 +557,18 @@ function initMobileMenu() {
       closeMenu();
     } else {
       openMenu();
+    }
+  });
+
+  // Tapping the backdrop (the actual page visible behind) closes the menu
+  navBackdrop.addEventListener('click', () => {
+    if (menuOpen) closeMenu();
+  });
+
+  // Tapping anywhere outside the menu card closes it
+  document.addEventListener('click', (e) => {
+    if (menuOpen && !navLinks.contains(e.target) && !hamburgerBtn.contains(e.target)) {
+      closeMenu();
     }
   });
 
