@@ -27,6 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initRoleFormMorph();
   initAddressCopy();
   initBackToTop();
+  initTestimonialsSlider();
 });
 
 /* --------------------------------------------------------------------------
@@ -500,8 +501,7 @@ function initScrollReveal() {
     '.objective-card',
     '.why-card',
     '.why-choose-grid > div',
-    '.testimonials-grid > div',
-    '.testimonial-card',
+    '.testimonials-carousel-container',
     '.invest-card',
     '.investment-cards > div',
     '.vc-capability-card',
@@ -561,7 +561,7 @@ function initScrollReveal() {
 
   contentBlocks.forEach((el) => {
     // Avoid double tagging or hero section tagging (hero uses CSS entrance animation)
-    if (el.closest('.hero-content') || el.closest('.inner-hero-container')) return;
+    if (el.closest('.hero-content') || el.closest('.inner-hero-container') || el.closest('.testimonials-carousel-track')) return;
 
     if (!el.classList.contains('scroll-reveal') &&
         !el.classList.contains('scroll-reveal-left') &&
@@ -1040,4 +1040,155 @@ function initBackToTop() {
   btn.addEventListener('touchend', (e) => {
     scrollToTopAction(e);
   }, { passive: false });
+}
+
+/* --------------------------------------------------------------------------
+   5.9 TESTIMONIALS SLIDER / CAROUSEL (AUTO-SCROLL + ARROWS + DOTS + SWIPE)
+   -------------------------------------------------------------------------- */
+function initTestimonialsSlider() {
+  const track = document.getElementById('testimonialsTrack');
+  const prevBtn = document.getElementById('testimonialPrevBtn');
+  const nextBtn = document.getElementById('testimonialNextBtn');
+  const dotsContainer = document.getElementById('testimonialDots');
+  if (!track) return;
+
+  const slides = Array.from(track.querySelectorAll('.testimonial-card'));
+  if (slides.length <= 1) return;
+
+  let currentIndex = 0;
+  let autoPlayTimer = null;
+  const autoPlayInterval = 5000;
+  let isPaused = false;
+
+  // Render pagination dots
+  if (dotsContainer) {
+    dotsContainer.innerHTML = '';
+    slides.forEach((_, idx) => {
+      const dot = document.createElement('button');
+      dot.className = `testimonial-dot ${idx === 0 ? 'active' : ''}`;
+      dot.setAttribute('type', 'button');
+      dot.setAttribute('aria-label', `Go to review ${idx + 1}`);
+      dot.addEventListener('click', (e) => {
+        e.preventDefault();
+        goToSlide(idx);
+        restartAutoPlay();
+      });
+      dotsContainer.appendChild(dot);
+    });
+  }
+
+  function updateDots() {
+    if (!dotsContainer) return;
+    const dots = dotsContainer.querySelectorAll('.testimonial-dot');
+    dots.forEach((dot, idx) => {
+      dot.classList.toggle('active', idx === currentIndex);
+    });
+  }
+
+  function goToSlide(index) {
+    if (index < 0) {
+      currentIndex = slides.length - 1;
+    } else if (index >= slides.length) {
+      currentIndex = 0;
+    } else {
+      currentIndex = index;
+    }
+    track.style.transform = `translateX(-${currentIndex * 100}%)`;
+    updateDots();
+  }
+
+  function nextSlide() {
+    goToSlide(currentIndex + 1);
+  }
+
+  function prevSlide() {
+    goToSlide(currentIndex - 1);
+  }
+
+  if (prevBtn) {
+    prevBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      prevSlide();
+      restartAutoPlay();
+    });
+  }
+
+  if (nextBtn) {
+    nextBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      nextSlide();
+      restartAutoPlay();
+    });
+  }
+
+  function startAutoPlay() {
+    stopAutoPlay();
+    autoPlayTimer = setInterval(() => {
+      if (!isPaused) {
+        nextSlide();
+      }
+    }, autoPlayInterval);
+  }
+
+  function stopAutoPlay() {
+    if (autoPlayTimer) {
+      clearInterval(autoPlayTimer);
+      autoPlayTimer = null;
+    }
+  }
+
+  function restartAutoPlay() {
+    stopAutoPlay();
+    startAutoPlay();
+  }
+
+  // Hover detection to pause auto-scroll
+  const container = track.closest('.testimonials-carousel-container') || track.parentElement;
+  if (container) {
+    container.addEventListener('mouseenter', () => { isPaused = true; });
+    container.addEventListener('mouseleave', () => { isPaused = false; });
+  }
+
+  const navWrapper = document.querySelector('.testimonials-nav-wrapper');
+  if (navWrapper) {
+    navWrapper.addEventListener('mouseenter', () => { isPaused = true; });
+    navWrapper.addEventListener('mouseleave', () => { isPaused = false; });
+  }
+
+  // Touch Swipe support for mobile
+  let touchStartX = 0;
+  let touchCurrentX = 0;
+  let isSwiping = false;
+
+  track.addEventListener('touchstart', (e) => {
+    isPaused = true;
+    touchStartX = e.touches[0].clientX;
+    touchCurrentX = touchStartX;
+    isSwiping = true;
+  }, { passive: true });
+
+  track.addEventListener('touchmove', (e) => {
+    if (!isSwiping) return;
+    touchCurrentX = e.touches[0].clientX;
+  }, { passive: true });
+
+  track.addEventListener('touchend', () => {
+    if (!isSwiping) return;
+    isSwiping = false;
+    isPaused = false;
+    const diff = touchStartX - touchCurrentX;
+    if (Math.abs(diff) > 40) {
+      if (diff > 0) {
+        nextSlide();
+      } else {
+        prevSlide();
+      }
+      restartAutoPlay();
+    }
+    touchStartX = 0;
+    touchCurrentX = 0;
+  });
+
+  // Start autoplay on load
+  startAutoPlay();
 }

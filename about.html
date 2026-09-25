@@ -72,7 +72,7 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
   <!-- Stylesheet -->
-  <link rel="stylesheet" href="styles.css?v=3.6">
+  <link rel="stylesheet" href="styles.css?v=3.7">
 </head>
 <body>
 
@@ -360,77 +360,91 @@
           </p>
         </div>
 
-        <div class="testimonials-grid">
-          
-          <!-- Testimonial 1 -->
-          <div class="testimonial-card scroll-reveal delay-1">
-            <div>
-              <div class="stars-rating">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-              </div>
-              <p class="testimonial-text">
-                "Thisaiva has completely revolutionized how we orchestrate co-investments. The SPV setup is blisteringly fast, and our LPs love the clean, intuitive subscription dashboard."
-              </p>
-            </div>
-            <div class="testimonial-author">
-              <span class="monogram-badge monogram-badge--lg" title="Marcus Vance">MV</span>
-              <div class="author-info">
-                <h4>Marcus Vance</h4>
-                <span>Managing Partner, Vance Syndicate</span>
-              </div>
-            </div>
-          </div>
+        <!-- Carousel Navigation Controls: Left & Right Buttons + Dots -->
+        <div class="testimonials-nav-wrapper">
+          <button class="testimonial-nav-btn prev" id="testimonialPrevBtn" type="button" aria-label="Previous Review">
+            <i class="fa-solid fa-arrow-left"></i>
+          </button>
+          <div class="testimonial-dots" id="testimonialDots"></div>
+          <button class="testimonial-nav-btn next" id="testimonialNextBtn" type="button" aria-label="Next Review">
+            <i class="fa-solid fa-arrow-right"></i>
+          </button>
+        </div>
 
-          <!-- Testimonial 2 -->
-          <div class="testimonial-card scroll-reveal delay-2">
-            <div>
-              <div class="stars-rating">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+        <!-- Testimonials Carousel Track -->
+        <div class="testimonials-carousel-container">
+          <div class="testimonials-carousel-track" id="testimonialsTrack">
+            
+            <!-- Testimonial 1 -->
+            <div class="testimonial-card">
+              <div>
+                <div class="stars-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                  "Thisaiva has completely revolutionized how we orchestrate co-investments. The SPV setup is blisteringly fast, and our LPs love the clean, intuitive subscription dashboard."
+                </p>
               </div>
-              <p class="testimonial-text">
-                "Consolidating 35+ angel checks into a single Special Purpose Vehicle saved us weeks of legal back-and-forth and kept our cap table pristine for our Series A."
-              </p>
-            </div>
-            <div class="testimonial-author">
-              <span class="monogram-badge monogram-badge--lg" title="Elena Rostova">ER</span>
-              <div class="author-info">
-                <h4>Elena Rostova</h4>
-                <span>Founder & CEO, Horizon Tech</span>
+              <div class="testimonial-author">
+                <span class="monogram-badge monogram-badge--lg" title="Marcus Vance">MV</span>
+                <div class="author-info">
+                  <h4>Marcus Vance</h4>
+                  <span>Managing Partner, Vance Syndicate</span>
+                </div>
               </div>
             </div>
-          </div>
 
-          <!-- Testimonial 3 -->
-          <div class="testimonial-card scroll-reveal delay-3">
-            <div>
-              <div class="stars-rating">
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
-                <i class="fa-solid fa-star"></i>
+            <!-- Testimonial 2 -->
+            <div class="testimonial-card">
+              <div>
+                <div class="stars-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                  "Consolidating 35+ angel checks into a single Special Purpose Vehicle saved us weeks of legal back-and-forth and kept our cap table pristine for our Series A."
+                </p>
               </div>
-              <p class="testimonial-text">
-                "The seamless handling of ongoing tax filings, capital calls, and Luxembourg fund structuring gives our fund management team total peace of mind."
-              </p>
-            </div>
-            <div class="testimonial-author">
-              <span class="monogram-badge monogram-badge--lg" title="Sophia Chen">SC</span>
-              <div class="author-info">
-                <h4>Sophia Chen</h4>
-                <span>Venture Partner, Ascent Horizon</span>
+              <div class="testimonial-author">
+                <span class="monogram-badge monogram-badge--lg" title="Elena Rostova">ER</span>
+                <div class="author-info">
+                  <h4>Elena Rostova</h4>
+                  <span>Founder & CEO, Horizon Tech</span>
+                </div>
               </div>
             </div>
-          </div>
 
+            <!-- Testimonial 3 -->
+            <div class="testimonial-card">
+              <div>
+                <div class="stars-rating">
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                  <i class="fa-solid fa-star"></i>
+                </div>
+                <p class="testimonial-text">
+                  "The seamless handling of ongoing tax filings, capital calls, and Luxembourg fund structuring gives our fund management team total peace of mind."
+                </p>
+              </div>
+              <div class="testimonial-author">
+                <span class="monogram-badge monogram-badge--lg" title="Sophia Chen">SC</span>
+                <div class="author-info">
+                  <h4>Sophia Chen</h4>
+                  <span>Venture Partner, Ascent Horizon</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
         </div>
 
       </div>
@@ -537,6 +551,6 @@
   </footer>
 
   <!-- JavaScript -->
-  <script src="script.js?v=3.5" defer></script>
+  <script src="script.js?v=3.7" defer></script>
 </body>
 </html>
